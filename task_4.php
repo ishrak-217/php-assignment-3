@@ -2,36 +2,66 @@
 
 $studentGrades = [
     "Student1" => [
-        "Math" => 85,
+        "Math"    => 85,
         "English" => 90,
-        "Science" => 78
+        "Science" => 78,
     ],
     "Student2" => [
-        "Math" => 92,
+        "Math"    => 92,
         "English" => 88,
-        "Science" => 95
+        "Science" => 95,
     ],
     "Student3" => [
-        "Math" => 78,
+        "Math"    => 78,
         "English" => 82,
-        "Science" => 87
-    ]
+        "Science" => 70,
+    ],
 ];
 
-function calculateAndPrintAverageGrades($grades) {
-    foreach ($grades as $student => $subjects) {
+function getLetterGrade( $numericGrade ) {
+
+    if ( $numericGrade >= 90 ) {
+        return 'A+';
+    } elseif ( $numericGrade >= 85 ) {
+        return 'A';
+    } elseif ( $numericGrade >= 80 ) {
+        return 'A-';
+    } elseif ( $numericGrade >= 75 ) {
+        return 'B+';
+    } elseif ( $numericGrade >= 70 ) {
+        return 'B';
+    } elseif ( $numericGrade >= 65 ) {
+        return 'B-';
+    } elseif ( $numericGrade >= 60 ) {
+        return 'C+';
+    } elseif ( $numericGrade >= 55 ) {
+        return 'C';
+    } elseif ( $numericGrade >= 50 ) {
+        return 'C-';
+    } elseif ( $numericGrade >= 45 ) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+
+}
+
+function calculateAndPrintAverageGrades( $grades ) {
+
+    foreach ( $grades as $student => $subjects ) {
         $total = 0;
         $count = 0;
-        
-        foreach ($subjects as $subject => $grade) {
+
+        foreach ( $subjects as $subject => $grade ) {
             $total += $grade;
             $count++;
         }
-        
+
         $average = $total / $count;
-        printf("%s's average grade is: %0.2f", $student, $average);
-        echo PHP_EOL;
+        $letterGrade = getLetterGrade( $average );
+        echo "$student's average grade: $letterGrade\n";
     }
+
 }
 
-calculateAndPrintAverageGrades($studentGrades);
+calculateAndPrintAverageGrades( $studentGrades );
